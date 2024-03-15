@@ -22,14 +22,9 @@ auth = firebase.auth()
 db = firebase.database()
 
 
-def postSpottings(crimeId, location, timeStamp, plateNo):
-    spottingData = {
-        "location": location,  # The randomized location of the spotting
-        "timeStamp": timeStamp,
-        "license": plateNo  # The License plate OCR variable here
-    }
-    db.child("crimes").child(crimeId).child("spottings").push(spottingData)
+def archiveCrime(crimeId):
+    db.child("crimes").child(crimeId).update({"status": False})
+    return "Crime archived successfully"
 
 
-print(postSpottings("TN38BB8981_1710468513229",
-      "Katpadi", "12:30 PM IST", "TN38BBB981"))
+print(archiveCrime("TN38BB8981_1710468513229"))

@@ -1,7 +1,9 @@
 import pyrebase
 import os
 from dotenv import load_dotenv
-import json, datetime, base64
+import json
+import datetime
+import base64
 
 load_dotenv()
 firebaseConfig = {
@@ -15,9 +17,10 @@ firebaseConfig = {
     'measurementId': os.getenv('FIREBASE_MEASUREMENT_ID')
 }
 
-firebase=pyrebase.initialize_app(firebaseConfig)
-auth=firebase.auth()
+firebase = pyrebase.initialize_app(firebaseConfig)
+auth = firebase.auth()
 db = firebase.database()
+
 
 def unix_time():
     presentDate = datetime.datetime.now()
@@ -25,15 +28,16 @@ def unix_time():
     round_unix_time = round(unix_timestamp)
     return str(round_unix_time)
 
+
 def postAlert(description, color, plateNo, estimatedTime):
     unixTime = unix_time()
-    crimeId = plateNo + unixTime
+    crimeId = plateNo + '_' + unixTime
     data = {
 
         "description": description,
         "details": {
-        "color": color,
-        "license": plateNo
+            "color": color,
+            "license": plateNo
         },
         "estimatedTime": estimatedTime,
         "status": True,
@@ -43,8 +47,4 @@ def postAlert(description, color, plateNo, estimatedTime):
     return "Alert posted successfully"
 
 
-# print(postAlert("Theft", "Red", "TN38BB8981", "10:00 PM IST"))
-
-
-
-
+print(postAlert("Theft", "Red", "TN38BB8981", "10:00 PM IST"))
