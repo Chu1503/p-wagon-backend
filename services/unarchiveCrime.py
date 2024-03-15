@@ -22,9 +22,9 @@ auth = firebase.auth()
 db = firebase.database()
 
 
-def archiveCrime(crimeId):
+def unarchiveCrime(crimeId):
     db.child("crimes").child(crimeId).update({"status": True})
     return "Crime unarchived successfully"
 
 
-print(archiveCrime("TN38BB8981_1710468513229"))
+print(unarchiveCrime("TN38BB8981_1710468513229"))

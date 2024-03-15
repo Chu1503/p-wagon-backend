@@ -29,7 +29,8 @@ def postSpottings(crimeId, location, timeStamp, plateNo):
         "license": plateNo  # The License plate OCR variable here
     }
     db.child("crimes").child(crimeId).child("spottings").push(spottingData)
+    return "Spotting posted successfully"
 
 
-print(postSpottings("TN38BB8981_1710468513229",
-      "Katpadi", "12:30 PM IST", "TN38BBB981"))
+# print(postSpottings("TN38BB8981_1710468513229",
+#       "Katpadi", "12:30 PM IST", "TN38BBB981"))

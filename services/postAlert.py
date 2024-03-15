@@ -47,4 +47,4 @@ def postAlert(description, color, plateNo, estimatedTime):
     return "Alert posted successfully"
 
 
-print(postAlert("Theft", "Red", "TN38BB8981", "10:00 PM IST"))
+# print(postAlert("Theft", "Red", "TN38BB8981", "10:00 PM IST"))
