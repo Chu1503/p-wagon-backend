@@ -1,9 +1,6 @@
 import pyrebase
 import os
 from dotenv import load_dotenv
-import json
-import datetime
-import base64
 
 load_dotenv()
 firebaseConfig = {
@@ -17,15 +14,16 @@ firebaseConfig = {
     'measurementId': os.getenv('FIREBASE_MEASUREMENT_ID')
 }
 
+
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 db = firebase.database()
 
 
-def unarchiveCrime(crimeId):
-    db.child("crimes").child(crimeId).update({"status": True})
-    # TODO: Add the crimeId to the RPI's list
-    return "Crime unarchived successfully"
-
-
-# print(unarchiveCrime("TN38BB8981_1710468513229"))
+def fetchRpi(rpi_id):
+    rpi_val = db.child("rpis").child(rpi_id).get().val()
+    if (rpi_val == False):
+        return "False"
+    if (not rpi_val):
+        return "Rpi not found"
+    return rpi_val

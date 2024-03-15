@@ -29,7 +29,7 @@ def unix_time():
     return str(round_unix_time)
 
 
-def postAlert(description, color, plateNo, estimatedTime):
+def postAlert(rpi_id, description, color, plateNo, estimatedTime):
     unixTime = unix_time()
     crimeId = plateNo + '_' + unixTime
     data = {
@@ -44,7 +44,13 @@ def postAlert(description, color, plateNo, estimatedTime):
         "spottings": False
     }
     db.child("crimes").child(crimeId).set(data)
+    curRpiSearches = db.child("rpis").child(rpi_id).get().val()
+    if curRpiSearches == False:
+        db.child("rpis").child(rpi_id).set({crimeId: True})
+    else:
+        db.child("rpis").child(rpi_id).update({crimeId: True})
+    db.child("rpis").child(rpi_id)
     return "Alert posted successfully"
 
 
-# print(postAlert("Theft", "Red", "TN38BB8981", "10:00 PM IST"))
+# print(postAlert("myRPI", "Abduction", "Black", "TN37WY1238", "7:00 AM IST"))

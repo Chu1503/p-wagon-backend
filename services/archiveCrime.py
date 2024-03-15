@@ -24,7 +24,13 @@ db = firebase.database()
 
 def archiveCrime(crimeId):
     db.child("crimes").child(crimeId).update({"status": False})
+    list_rpis = db.child("rpis").get().val()
+    for rpi in list_rpis:
+        db.child("rpis").child(rpi).child(crimeId).remove()
+        if (rpi not in db.child("rpis").get().val()):
+            db.child("rpis").update({rpi: False})
+
     return "Crime archived successfully"
 
 
-print(archiveCrime("TN38BB8981_1710468513229"))
+# print(archiveCrime("TN37WY1238_1710536688735"))

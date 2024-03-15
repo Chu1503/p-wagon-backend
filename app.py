@@ -5,6 +5,8 @@ from services import postSpottings as ps
 from services import postAlert as pa
 from services import archiveCrime as ac
 from services import unarchiveCrime as uc
+from services import fetchRpi as fr
+
 app = Flask(__name__)
 
 app.secret_key = 'secret'
@@ -23,11 +25,18 @@ def fetchCrimes():
 @app.route('/api/postAlert', methods=['POST'])
 def postAlert():
     req = request.get_json()
+    rpi_id = req['rpi_id']
     description = req['description']
     color = req['color']
     plateNo = req['plateNo']
     estimatedTime = req['estimatedTime']
-    return pa.postAlert(description, color, plateNo, estimatedTime)
+    return pa.postAlert(rpi_id, description, color, plateNo, estimatedTime)
+
+
+@app.route('/api/fetchRpi', methods=['GET'])
+def fetchRpi():
+    rpi_id = request.args.get('rpi_id')
+    return fr.fetchRpi(rpi_id)
 
 
 @app.route('/api/postSpottings', methods=['POST'])
