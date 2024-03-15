@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_cors import CORS
 import json
 from services import fetchCrime as fc
 from services import postSpottings as ps
@@ -8,8 +9,10 @@ from services import unarchiveCrime as uc
 from services import fetchRpi as fr
 
 app = Flask(__name__)
+CORS(app)
 
 app.secret_key = 'secret'
+
 
 
 @app.route('/')

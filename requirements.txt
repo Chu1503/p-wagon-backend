@@ -6,8 +6,10 @@ click==8.1.7
 colorama==0.4.6
 cryptography==42.0.5
 Flask==3.0.2
+Flask-Cors==4.0.0
 gcloud==0.18.3
 googleapis-common-protos==1.63.0
+gunicorn==19.7.1
 httplib2==0.22.0
 idna==3.6
 importlib_metadata==7.0.2
@@ -33,4 +35,3 @@ typing_extensions==4.10.0
 urllib3==1.26.18
 Werkzeug==3.0.1
 zipp==3.18.1
-gunicorn==19.7.1
