@@ -25,6 +25,7 @@ db = firebase.database()
 def unarchiveCrime(crimeId):
     db.child("crimes").child(crimeId).update({"status": True})
     # TODO: Add the crimeId to the RPI's list
+    db.child("rpis").child("myRPI").update({crimeId: True})
     return "Crime unarchived successfully"
 
 
