@@ -44,12 +44,17 @@ def postAlert(rpi_id, description, color, plateNo, estimatedTime):
         "spottings": False
     }
     db.child("crimes").child(crimeId).set(data)
-    curRpiSearches = db.child("rpis").child(rpi_id).get().val()
-    if curRpiSearches == False:
-        db.child("rpis").child(rpi_id).set({crimeId: True})
-    else:
-        db.child("rpis").child(rpi_id).update({crimeId: True})
-    db.child("rpis").child(rpi_id)
+
+    # For now rpi node won't get empty
+    db.child("rpis").child(rpi_id).update({crimeId: True})
+
+    # curRpiSearches = db.child("rpis").child(rpi_id).get().val()
+    # if curRpiSearches == False:
+    #     db.child("rpis").child(rpi_id).set({crimeId: True})
+    # else:
+    #     db.child("rpis").child(rpi_id).update({crimeId: True})
+    # db.child("rpis").child(rpi_id)
+    
     return "Alert posted successfully"
 
 
